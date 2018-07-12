@@ -1,0 +1,10 @@
+db.sqlite3
+.idea/misc.xml
+.idea/modules.xml
+.idea/team-performance.iml
+.idea/workspace.xml
+apps/__pycache__/
+conf/__pycache__/
+custom_commands/__pycache__/
+custom_commands/management/__pycache__/
+custom_commands/management/commands/__pycache__/
