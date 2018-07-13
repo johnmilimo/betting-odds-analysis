@@ -62,7 +62,8 @@ WAGTAIL_APPS = [
 ]
 
 EXTRA = [
-    "custom_commands"
+    "custom_commands",
+    "rest_framework"
 ]
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + WAGTAIL_APPS + EXTRA
 
@@ -84,7 +85,9 @@ ROOT_URLCONF = 'game.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
