@@ -19,9 +19,9 @@ class Location(models.Model):
 
 
 class Match(models.Model):
-    team_a = models.CharField(max_length=30)
-    team_b = models.CharField(max_length=30)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    team_a = models.CharField(max_length=50)
+    team_b = models.CharField(max_length=50)
+    location = models.CharField(max_length=100)
     created_at = models.DateField(auto_now_add=True)
     match_date = models.DateField()
     results = models.CharField(max_length=5)
@@ -29,7 +29,7 @@ class Match(models.Model):
     team_b_win = models.BooleanField(default=False)
     score_draw = models.BooleanField(default=False)
     nil_draw = models.BooleanField(default=False)
-    other = JSONField()
+    other = JSONField(default=dict)
 
     def __str__(self):
         return self.team_a + " Vs " + self.team_b
