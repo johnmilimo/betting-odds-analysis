@@ -22,7 +22,39 @@
       </div>
     </nav>
   <div class="container">
-    <h1>FOOTBALL - LATEST HIGHLIGHTS</h1>
+    <h1 style="text-align:center">FOOTBALL - LATEST HIGHLIGHTS</h1><br/>
+
+      <div class="row">
+        <div class="col-sm">
+            <input class="form-control" type="search" placeholder="type team name" id="home_team">
+        </div>
+          <strong>Vs</strong>
+        <div class="col-sm">
+            <input class="form-control" type="search" placeholder="type team name (Optional)" id="away_team">
+        </div>
+          <strong>From</strong>
+        <div class="col-sm">
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' placeholder="date (optional)" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+          <strong>To</strong>
+        <div class="col-sm">
+           <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' placeholder="date (optional)" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        </div>
+      </div>
 
     <table class="table table-striped table-bordered table-hover table-sm">
       <thead class="thead-dark">
@@ -68,6 +100,20 @@
         </div>
     </div>
   </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker6').datetimepicker();
+            $('#datetimepicker7').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#datetimepicker6").on("dp.change", function (e) {
+                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+            });
+            $("#datetimepicker7").on("dp.change", function (e) {
+                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -14,7 +14,7 @@ class MatchView(View):
     def get(self, request):
 
         # data = serializers.serialize("json", Match.objects.all())
-        data = Match.objects.all()
+        data = Match.objects.all().order_by('-match_date')
         return render(request, self.template_name, {'data': data})
 
     def post(self, request):
