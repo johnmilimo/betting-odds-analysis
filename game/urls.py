@@ -22,11 +22,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 
-from apps.football.views import MatchView
+from apps.football.views import MatchView, UploadMatchData
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', MatchView.as_view()),
+    path(r'upload/', UploadMatchData.as_view()),
 
 
     re_path(r'^cms/', include(wagtailadmin_urls)),
