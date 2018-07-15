@@ -7,6 +7,8 @@ python manage.py migrate --noinput --settings=$DJANGO_SETTINGS_MODULE
 
 python manage.py create_admin_user --settings=$DJANGO_SETTINGS_MODULE
 
+python manage.py collectstatic --noinput --settings=$DJANGO_SETTINGS_MODULE
+
 python manage.py populate_sample_data --settings=$DJANGO_SETTINGS_MODULE
 
 python manage.py runserver 0.0.0.0:8081 --settings=$DJANGO_SETTINGS_MODULE
