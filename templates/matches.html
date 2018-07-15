@@ -26,25 +26,29 @@
     </nav>
   <div class="container">
     <h1 style="text-align:center">FOOTBALL - LATEST HIGHLIGHTS</h1><br/>
-
+    <form action="{% url 'match' %}" method="POST">
       <div class="row">
         <div class="col-sm">
-            <input class="form-control" type="search" placeholder="type team name" id="home_team">
+            <input class="form-control" type="search" placeholder="type team name" id="team_a" name="team_a">
         </div>
           <strong>Vs</strong>
         <div class="col-sm">
-            <input class="form-control" type="search" placeholder="type team name (Optional)" id="away_team">
+            <input class="form-control" type="search" placeholder="type team name (Optional)" id="team_b" name="team_b">
         </div>
           <strong>From</strong>
         <div class="col-sm">
-                <input type='text' placeholder="date (optional)" class="form-control" id='datetimepicker6' />
+                <input type='text' placeholder="date (optional)" class="form-control" id='datetimepicker6' name="start_date" />
         </div>
           <strong>To</strong>
         <div class="col-sm">
-               <input type='text' placeholder="date (optional)" class="form-control" id='datetimepicker7' />
+               <input type='text' placeholder="date (optional)" class="form-control" id='datetimepicker7' name="end_date" />
         </div>
-      </div>
+          <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
 
+      </div>
+    </form>
     <table class="table table-striped table-bordered table-hover table-sm">
       <thead class="thead-dark">
         <tr>
@@ -70,24 +74,67 @@
       </tbody>
     </table>
 
-      <div class="row">
-        <div class="col-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </div>
-        <div class="col-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </div>
-    </div>
+      <div class="w-50 p-3">
+            {% if results and results.single %}
+
+              <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Team
+                      <span class="badge-secondary badge-pill">{{results.team}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Matches Played
+                      <span class="badge-secondary badge-pill">{{results.total_matches}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Games Won
+                      <span class="badge-secondary badge-pill">{{results.total_wins}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Draws With Goals
+                      <span class="badge-secondary badge-pill">{{results.total_score_draws}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Draws Without Goals
+                      <span class="badge-secondary badge-pill">{{results.total_nil_draws}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Period of Analysis
+                      <span class="badge-secondary badge-pill">{{results.start_period}} - {{results.end_period}}</span>
+                  </li>
+              </ul>
+
+            {% elif results %}
+             <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Team
+                      <span class="badge-secondary badge-pill">{{results.team}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Matches Played
+                      <span class="badge-secondary badge-pill">{{results.total_matches}}</span>
+                  </li>
+                 {% for team, score in results.total_wins_per_team.items %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Games Won by {{ team }}
+                      <span class="badge-secondary badge-pill">{{score}}</span>
+                  </li>
+                 {% endfor %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Draws With Goals
+                      <span class="badge-secondary badge-pill">{{results.total_score_draws}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Draws Without Goals
+                      <span class="badge-secondary badge-pill">{{results.total_nil_draws}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Period of Analysis
+                      <span class="badge-secondary badge-pill">{{results.start_period}} - {{results.end_period}}</span>
+                  </li>
+              </ul>
+            {% endif %}
+      </div>
   </div>
     <script type="text/javascript">
         $(function () {

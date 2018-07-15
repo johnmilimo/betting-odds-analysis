@@ -15,27 +15,31 @@ class MatchView(View):
 
         # data = serializers.serialize("json", Match.objects.all())
         data = Match.objects.all().order_by('-match_date')
-        return render(request, self.template_name, {'data': data})
+
+        return render(request, self.template_name, {'data': data, "results": {}})
 
     def post(self, request):
         print("post logging: ", dict(request.POST))
-        analysis_type = request.POST['analysis_type']
-        if analysis_type=='single_team':
-            team = request.POST.get('team')
-            if not team:
-                return HttpResponse("team is required")
-            analyzer = MatchAnalyzer(team)
+        team_a = request.POST['team_a']
+        team_b = request.POST['team_b']
+        results = {
+            "matches": {}
+        }
+
+        if team_a and (not team_b):
+            analyzer = MatchAnalyzer(team_a)
             results = analyzer.analyze_team_performance()
-        else:
-            team_a = request.POST['team_a']
-            team_b = request.POST['team_b']
-            if not team_a or not team_b:
-                return HttpResponse("team_a and team_b values are required")
+            results['single'] = True
+
+        elif team_a and team_b:
             analyzer = MatchAnalyzer(team_a, team_b)
             results = analyzer.analyze_match_performance()
+            results['single'] = False
 
-        return HttpResponse(json.dumps(results),
-                                content_type="application/json")
+        matches = results['matches']
+        del results['matches']
+
+        return render(request, self.template_name, {'data': matches, "results": results})
 
 
 class UploadMatchData(LoginRequiredMixin, View):

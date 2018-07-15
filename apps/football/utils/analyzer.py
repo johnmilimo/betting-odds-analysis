@@ -53,15 +53,9 @@ class MatchAnalyzer:
             elif match.nil_draw:
                 results['nil_draws'] += 1
             else:
-                raise Exception
+                pass
 
-            results['matches'].append(
-                                {
-                                    "team_a": match.team_a,
-                                    "team_b": match.team_b,
-                                    "results": match.results,
-                                    "location": match.location
-                                 })
+            results['matches'].append(self.get_match_data(match))
 
         self.record_event({"team_performance_request": {"team": self.team_a}})
 
@@ -106,13 +100,9 @@ class MatchAnalyzer:
             else:
                 raise Exception
 
-            results['matches'].append(
-                                {
-                                    "team_a": match.team_a,
-                                    "team_b": match.team_b,
-                                    "results": match.results,
-                                    "location": match.location
-                                 })
+            results['matches'].append(self.get_match_data(match))
+
+        results['team'] = self.team_a + " Vs " + self.team_b
 
         self.record_event({"past_performance_request": {"team_a": self.team_a,
                                                    "team_b": self.team_b}})
@@ -121,4 +111,13 @@ class MatchAnalyzer:
 
     def record_event(self, event):
         print(event)
+
+    def get_match_data(self, match):
+        return {
+            "team_a": match.team_a,
+            "team_b": match.team_b,
+            "results": match.results,
+            "location": match.location,
+            "match_date": match.match_date
+        }
 
