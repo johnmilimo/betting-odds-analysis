@@ -49,9 +49,9 @@ class MatchAnalyzer:
                     (match.team_b_win and match.team_b == self.team_a):
                 results['total_wins'] += 1
             elif match.score_draw:
-                results['score_draws'] += 1
+                results['total_score_draws'] += 1
             elif match.nil_draw:
-                results['nil_draws'] += 1
+                results['total_nil_draws'] += 1
             else:
                 pass
 
@@ -117,7 +117,7 @@ class MatchAnalyzer:
             "team_a": match.team_a,
             "team_b": match.team_b,
             "results": match.results,
-            "location": match.location,
+            "league": match.league,
             "match_date": match.match_date
         }
 

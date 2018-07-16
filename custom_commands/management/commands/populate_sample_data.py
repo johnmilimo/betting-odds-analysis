@@ -8,60 +8,60 @@ SAMPLE_MATCHES = [
     {
         "date": '13/07/18 21:15',
         "team": 'Sonderjyske vs AaB Aalborg',
-        "location": 'Superligaen, Denmark',
+        "league": 'Superligaen, Denmark',
         "results": '0:1'
      },
     {
         "date": '13/07/18 21:10',
         'team': 'Galarneau, Alexis vs Soeda, GO',
         'results': '0:2',
-        'location': 'Winnipeg, Canada'
+        'league': 'Winnipeg, Canada'
     },
     {
         'date': '13/07/18 21:00',
         'team': 'Cork City vs Burnley',
-        'location': 'Club Friendly Games, International',
+        'league': 'Club Friendly Games, International',
         'results': '0:1'
     },
     {
         'team': 'Cong Anh Nhan Dan vs XM Fico Tay Ninh',
-        'location': 'V-League 2, Vietnam',
+        'league': 'V-League 2, Vietnam',
         'date': '14/07/18 11:30',
         'results': '3:1'
     },
     {
         'team': 'Hainan Haihan vs Hunan Xiangtao',
-        'location': 'China League 2, South, China',
+        'league': 'China League 2, South, China',
         'date': '14/07/18 11:30',
         'results': '1:1'
     },
     {
         'team': 'Brisbane Strikers vs Redlands Utd',
-        'location': 'NPL, Queensland, Australia',
+        'league': 'NPL, Queensland, Australia',
         'date': '14/07/18 11:00',
         'results': '0:0'
     },
     {
         'team': 'Kromeriz vs MFK Dubnica',
-        'location': 'Club Friendly Games, International',
+        'league': 'Club Friendly Games, International',
         'date': '14/07/18 11:30',
         'results': '4:1'
     },
     {
         'team': 'Yanbian Beiguo vs Baotou Nanjiao',
-        'location': 'China League 2, North, China',
+        'league': 'China League 2, North, China',
         'date': '14/07/18 10:30',
         'results': '2:1'
     },
     {
         'team': 'Univ of Queensland vs Grange Thistle',
-        'location': 'Brisbane Premier League, Australia',
+        'league': 'Brisbane Premier League, Australia',
         'date': '14/07/18 10:00',
         'results': '3:2'
     },
     {
         'team': 'Hebei Jingying vs Qingdao Jonoon',
-        'location': 'China League 2, North, China',
+        'league': 'China League 2, North, China',
         'date': '14/07/18 11:00',
         'results': '2:1'
     }
@@ -71,43 +71,47 @@ SAMPLE_MATCHES = [
 class Command(BaseCommand):
     help = 'Create Sample Data'
 
-    def populate(self, data):
+    def populate_results(self, data):
         for match in data:
-            team_a_win = False
-            team_b_win = False
-            score_draw = False
-            nil_draw = False
-            teams = match['team'].split(" vs ")
-            team_a, team_b = teams[0], teams[1]
-            date = self.format_date(match['date'])
-            location = match['location']
-            result = match['results'].split(' ')[0].replace("-",":")
-            if int(result.split(":")[0]) > int(result.split(":")[1]):
-                team_a_win = True
-            elif int(result.split(":")[1]) > int(result.split(":")[0]):
-                team_b_win = True
-            elif int(result.split(":")[0]) == int(result.split(":")[1]) \
-                    and int(result.split(":")[0]) > 0:
-                score_draw = True
-            elif int(result.split(":")[0]) == int(result.split(":")[1]) \
-                    and int(result.split(":")[0]) == 0:
-                nil_draw = True
+            try:
+                team_a_win = False
+                team_b_win = False
+                score_draw = False
+                nil_draw = False
+                teams = match['team'].split(" vs ")
+                team_a, team_b = teams[0], teams[1]
+                date = self.format_date(match['date'])
+                league = match['league']
+                result = match['results'].split(' ')[0].replace("-",":")
+                if int(result.split(":")[0]) > int(result.split(":")[1]):
+                    team_a_win = True
+                elif int(result.split(":")[1]) > int(result.split(":")[0]):
+                    team_b_win = True
+                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                        and int(result.split(":")[0]) > 0:
+                    score_draw = True
+                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                        and int(result.split(":")[0]) == 0:
+                    nil_draw = True
 
-            Match.objects.get_or_create(
-                team_a=team_a,
-                team_b=team_b,
-                match_date=date,
-                location=location,
-                results=result,
-                team_a_win=team_a_win,
-                team_b_win=team_b_win,
-                score_draw=score_draw,
-                nil_draw=nil_draw
-            )
+                Match.objects.get_or_create(
+                    team_a=team_a,
+                    team_b=team_b,
+                    match_date=date,
+                    league=league,
+                    results=result,
+                    team_a_win=team_a_win,
+                    team_b_win=team_b_win,
+                    score_draw=score_draw,
+                    nil_draw=nil_draw
+                )
+            except Exception as e:
+                print(match)
+                print(e)
 
     def handle(self, *args, **options):
         try:
-            self.populate(SAMPLE_MATCHES)
+            self.populate_results(SAMPLE_MATCHES)
         except Exception as e:
             raise CommandError(e)
 

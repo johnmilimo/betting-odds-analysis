@@ -10,7 +10,7 @@ class Team(models.Model):
         return self.name
 
 
-class Location(models.Model):
+class League(models.Model):
     name = models.CharField(max_length=30)
     created = models.DateField(auto_now_add=True)
 
@@ -21,10 +21,11 @@ class Location(models.Model):
 class Match(models.Model):
     team_a = models.CharField(max_length=50)
     team_b = models.CharField(max_length=50)
-    location = models.CharField(max_length=100)
+    league = models.CharField(max_length=100)
     created_at = models.DateField(auto_now_add=True)
     match_date = models.DateField()
     results = models.CharField(max_length=5)
+    odds = models.CharField(max_length=20, blank=True)
     team_a_win = models.BooleanField(default=False)
     team_b_win = models.BooleanField(default=False)
     score_draw = models.BooleanField(default=False)
