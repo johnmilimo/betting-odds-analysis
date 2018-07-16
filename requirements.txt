@@ -2,3 +2,5 @@ django==2.0.7
 wagtail
 psycopg2-binary
 djangorestframework
+lxml
+bs4

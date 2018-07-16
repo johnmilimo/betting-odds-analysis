@@ -11,3 +11,5 @@ custom_commands/management/commands/__pycache__/
 game/__pycache__/urls.cpython-37.pyc
 *.pyc
 staticfiles/*
+sample_data/*
+media/*

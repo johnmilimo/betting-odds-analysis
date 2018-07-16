@@ -27,6 +27,7 @@
   <div class="container">
     <h1 style="text-align:center">FOOTBALL - LATEST HIGHLIGHTS</h1><br/>
     <form action="{% url 'match' %}" method="POST">
+        {% csrf_token %}
       <div class="row">
         <div class="col-sm">
             <input class="form-control" type="search" placeholder="type team name" id="team_a" name="team_a">

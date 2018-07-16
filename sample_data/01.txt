@@ -1,0 +1,399 @@
+<div class="league">
+<div class="leaguename hide">
+<span class="name">
+<span class="flag-icon flag-icon-us"></span>
+Name of the League
+</span>
+</div>
+<!-- ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 22:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Sportivo Trinidense vs River Plate PAR<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-pry"></span> Segunda Division, Paraguay </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 22:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Resistencia FC vs CS 2 de Mayo<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-pry"></span> Segunda Division, Paraguay </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:2</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 21:45</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Fulgencio Yegros vs Sp. San Lorenzo<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-pry"></span> Segunda Division, Paraguay </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 21:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Atlanta United vs Seattle Sounders<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-usa"></span> Major League Soccer, USA </span>
+</li>
+<li class="result">
+<span class="ng-binding">1-1 (0-1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 21:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Deportivo Los Caimanes vs Atletico Grau<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-per"></span> Segunda Division, Peru </span>
+</li>
+<li class="result">
+<span class="ng-binding">2:1</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 20:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Puebla FC W vs Tiburones Rojos De Veracruz W<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-mex"></span> Liga MX, Women, Apertura, Group 1, Mexico </span>
+</li>
+<li class="result">
+<span class="ng-binding">4:0 (1:0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 19:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Penafiel vs Santa Clara<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-int"></span> Club Friendly Games, International </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0 (0:0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 18:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Atalanta vs FC Chiasso<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-int"></span> Club Friendly Games, International </span>
+</li>
+<li class="result">
+<span class="ng-binding">6:1 (3:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 18:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>France vs Croatia<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-int"></span> World Cup, Knockout stage, International </span>
+</li>
+<li class="result">
+<span class="ng-binding">4:2 (2:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 17:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Skellefteaa FF vs Nykoping Bis<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-swe"></span> Division 1, Norra, Sweden </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:2 (0:2)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Napsa Stars vs Forest Rangers<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-zmb"></span> Premier League, Zambia </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Green Buffaloes vs Nchanga Rangers<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-zmb"></span> Premier League, Zambia </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Kairat Almaty vs Zhetysu<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-kaz"></span> Premier League, Kazakhstan </span>
+</li>
+<li class="result">
+<span class="ng-binding">2:1 (0:0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Zanaco vs Buildcon<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-zmb"></span> Premier League, Zambia </span>
+</li>
+<li class="result">
+<span class="ng-binding">2:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Tegs SK vs FC Linkoping City<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-swe"></span> Division 1, Norra, Sweden </span>
+</li>
+<li class="result">
+<span class="ng-binding">2:2 (2:0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Kabwe Youth Soccer Acad vs Nkwazi<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-zmb"></span> Premier League, Zambia </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Selangor FC vs Kuala Lumpur<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-mys"></span> Super League, Malaysia </span>
+</li>
+<li class="result">
+<span class="ng-binding">3:3 (2:2)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 16:00</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Kristianstads FF vs Utsiktens BK<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-swe"></span> Division 1, Sodra, Sweden </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:3 (0:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:45</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Dnepr Mogilev vs Gorodeya<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-blr"></span> Vysshaya League, Belarus </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:2 (0:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Dragon FC Yaounde vs Yaounde II FC<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">4:0 (2-0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Heracles vs Jong Ajax<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-int"></span> Club Friendly Games, International </span>
+</li>
+<li class="result">
+<span class="ng-binding">3:1 (2:0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Eding Sport FC vs APEJES FC<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:1 (0-0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Irtysh Pavlodar vs Ordabasy<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-kaz"></span> Premier League, Kazakhstan </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:2 (0:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Huginn vs Grotta<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-isl"></span> 2 deild, Iceland </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:1</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Fovu Club vs FC Du Haut-Nkam<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Union de Loum vs Bamboutos<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0 (0-0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Slovan Liberec vs Slask Wroclaw<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-int"></span> Club Friendly Games, International </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:1 (0:1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Colombe FC vs Sportive de Douala<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">1:1 (0-1)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>New Star vs Young Sports Academy<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:0 (0-0)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index --><div class="result ng-scope" itemscope="" itemtype="https://schema.org/SportsEvent" ng-repeat="result in results.view track by $index">
+<ul class="meta">
+<li class="time">
+<time datetime="10:00" class="ng-binding">15/07/18 15:30</time>
+</li>
+<li class="event">
+<span class="ng-binding"><span class="icon" style="background:url('/img/sportsnav/1.svg');"></span>Aigle Royal vs Les Astres<br></span>
+<span class="league ng-binding"><span class="flag-icon flag-icon-cmr"></span> Elite One, Cameroon </span>
+</li>
+<li class="result">
+<span class="ng-binding">0:3 (0-2)</span>
+</li>
+</ul>
+</div><!-- end ngRepeat: result in results.view track by $index -->
+</div>

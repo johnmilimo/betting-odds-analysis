@@ -33,3 +33,9 @@ class Match(models.Model):
 
     def __str__(self):
         return self.team_a + " Vs " + self.team_b
+
+
+class MatchFile(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='match_files/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

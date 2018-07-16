@@ -71,40 +71,43 @@ SAMPLE_MATCHES = [
 class Command(BaseCommand):
     help = 'Create Sample Data'
 
+    def populate(self, data):
+        for match in data:
+            team_a_win = False
+            team_b_win = False
+            score_draw = False
+            nil_draw = False
+            teams = match['team'].split(" vs ")
+            team_a, team_b = teams[0], teams[1]
+            date = self.format_date(match['date'])
+            location = match['location']
+            result = match['results'].split(' ')[0].replace("-",":")
+            if int(result.split(":")[0]) > int(result.split(":")[1]):
+                team_a_win = True
+            elif int(result.split(":")[1]) > int(result.split(":")[0]):
+                team_b_win = True
+            elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                    and int(result.split(":")[0]) > 0:
+                score_draw = True
+            elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                    and int(result.split(":")[0]) == 0:
+                nil_draw = True
+
+            Match.objects.get_or_create(
+                team_a=team_a,
+                team_b=team_b,
+                match_date=date,
+                location=location,
+                results=result,
+                team_a_win=team_a_win,
+                team_b_win=team_b_win,
+                score_draw=score_draw,
+                nil_draw=nil_draw
+            )
+
     def handle(self, *args, **options):
         try:
-            for match in SAMPLE_MATCHES:
-                team_a_win = False
-                team_b_win = False
-                score_draw = False
-                nil_draw = False
-                teams = match['team'].split(" vs ")
-                team_a, team_b = teams[0], teams[1]
-                date = self.format_date(match['date'])
-                location = match['location']
-                result = match['results']
-                if int(result.split(":")[0]) > int(result.split(":")[1]):
-                    team_a_win = True
-                elif int(result.split(":")[1]) > int(result.split(":")[0]):
-                    team_b_win = True
-                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
-                        and int(result.split(":")[0]) > 0:
-                    score_draw = True
-                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
-                        and int(result.split(":")[0]) == 0:
-                    nil_draw = True
-
-                Match.objects.get_or_create(
-                    team_a=team_a,
-                    team_b=team_b,
-                    match_date=date,
-                    location=location,
-                    results=result,
-                    team_a_win=team_a_win,
-                    team_b_win=team_b_win,
-                    score_draw=score_draw,
-                    nil_draw=nil_draw
-                      )
+            self.populate(SAMPLE_MATCHES)
         except Exception as e:
             raise CommandError(e)
 

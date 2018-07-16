@@ -5,3 +5,4 @@ from apps.football.models import *
 admin.site.register(Team)
 admin.site.register(Match)
 admin.site.register(Location)
+admin.site.register(MatchFile)

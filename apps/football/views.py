@@ -1,8 +1,9 @@
 import json
 from django.shortcuts import render
 from django.views import View
-from django.views.decorators.csrf import csrf_protect
+from custom_commands.management.commands.populate_sample_data import Command
 
+from lxml import html as ht
 from apps.football.models import *
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -49,8 +50,36 @@ class UploadMatchData(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, self.template_name)
 
-    @csrf_protect
     def post(self, request):
+
+        _file = request.FILES['datafile']
+        if not _file:
+            return HttpResponse('FAILED: You havent uploaded any file')
+        obj, created = MatchFile.objects.get_or_create(document=_file)
+        self.handle_uploaded_file(obj.document)
+
         return HttpResponse('File uploaded successfully!')
 
+    def handle_uploaded_file(self, _file):
+        html_text = _file.read()
+        matches = []
+        tree = ht.fromstring(html_text)
+        time = tree.xpath('//time[@class="ng-binding"]/text()')
+        teams = tree.xpath('//li[@class="event"]/span[@class="ng-binding"]/text()')
+        league = tree.xpath('//span[@class="league ng-binding"]/text()')
+        results = tree.xpath('//li[@class="result"]/span[@class="ng-binding"]/text()')
 
+        print(results)
+        print()
+
+        for i in range(len(teams)):
+            matches.append(
+                {
+                    'team': teams[i],
+                    'location': league[i],
+                    'date': time[i],
+                    'results': results[i]
+                }
+            )
+
+        Command().populate(matches)
