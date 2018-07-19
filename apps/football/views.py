@@ -9,14 +9,19 @@ from apps.football.models import *
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.football.utils.analyzer import MatchAnalyzer
+from django.core.paginator import Paginator
+
 
 class MatchView(View):
     template_name = 'matches.html'
 
     def get(self, request):
 
-        # data = serializers.serialize("json", Match.objects.all())
-        data = Match.objects.all().order_by('-match_date')
+        match_list = Match.objects.all().order_by('-results')
+        paginator = Paginator(match_list, 30)  # Show 30 matches per page
+
+        page = request.GET.get('page')
+        data = paginator.get_page(page)
 
         return render(request, self.template_name, {'data': data, "results": {}})
 
@@ -57,9 +62,10 @@ class UploadMatchData(LoginRequiredMixin, View):
         if not _file:
             return HttpResponse('FAILED: You havent uploaded any file')
         category = request.POST['category']
-
+        print("category:", category)
         obj, created = MatchFile.objects.get_or_create(document=_file)
         if category == 'results':
+            print("process results")
             self.process_results_data(obj.document)
         else:
             self.process_odds_data(obj.document)
@@ -89,6 +95,9 @@ class UploadMatchData(LoginRequiredMixin, View):
         leagues = tree.xpath('//div/div/span[@class="name"]/text()')
         leagues = [x.replace('\n', '') for x in leagues if x != '\n']
 
+        print(leagues)
+        print()
+
         matches = list(self.chunks(teams, 3))
         odds = list(self.chunks(odds, 3))
 
@@ -96,12 +105,12 @@ class UploadMatchData(LoginRequiredMixin, View):
         for match in matches:
             obj, created = Match.objects.get_or_create(
                 team_a=match[0],
-                team_b=match[1],
-                match_date=datetime.strptime(time[index],
-                                                '%d/%m/%y %H:%M'),
-                league=leagues[index],
+                team_b=match[2],
+                match_date=datetime.strptime(time[index], '%d/%m/%y'),
             )
-            obj.odds = " - ".join(odds[index])
+            obj.odds = " | ".join(odds[index])
+            if created:
+                obj.league = leagues[index],
             obj.save()
 
             index += 1

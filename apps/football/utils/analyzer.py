@@ -116,6 +116,7 @@ class MatchAnalyzer:
         return {
             "team_a": match.team_a,
             "team_b": match.team_b,
+            "odds": match.odds,
             "results": match.results,
             "league": match.league,
             "match_date": match.match_date

@@ -94,17 +94,18 @@ class Command(BaseCommand):
                         and int(result.split(":")[0]) == 0:
                     nil_draw = True
 
-                Match.objects.get_or_create(
+                obj, created = Match.objects.get_or_create(
                     team_a=team_a,
                     team_b=team_b,
                     match_date=date,
-                    league=league,
-                    results=result,
-                    team_a_win=team_a_win,
-                    team_b_win=team_b_win,
-                    score_draw=score_draw,
-                    nil_draw=nil_draw
                 )
+                obj.results = result
+                obj.league = league
+                obj.team_a_win = team_a_win
+                obj.team_b_win = team_b_win
+                obj.score_draw = score_draw
+                obj.nil_draw = nil_draw
+                obj.save()
             except Exception as e:
                 print(match)
                 print(e)

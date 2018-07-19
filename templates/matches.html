@@ -56,6 +56,7 @@
           <th scope="col">#</th>
           <th scope="col">Team A</th>
           <th scope="col">Team B</th>
+          <th scope="col">Odds</th>
           <th scope="col">Results</th>
           <th scope="col">League</th>
           <th scope="col">Date</th>
@@ -67,6 +68,7 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{match.team_a}}</td>
             <td>{{match.team_b}}</td>
+            <td>{{match.odds}}</td>
             <td>{{match.results}}</td>
             <td>{{match.league}}</td>
             <td>{{match.match_date}}</td>
@@ -74,6 +76,24 @@
       {% endfor %}
       </tbody>
     </table>
+
+      <div class="pagination">
+        <span class="step-links">
+            {% if data.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ data.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ data.number }} of {{ data.paginator.num_pages }}.
+            </span>
+
+            {% if data.has_next %}
+                <a href="?page={{ data.next_page_number }}">next</a>
+                <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+      </div>
 
       <div class="w-50 p-3">
             {% if results and results.single %}
