@@ -1,8 +1,6 @@
-import os
-from django.conf import settings
+from django.utils import timezone
 from apps.football.models import Match
 from django.core.management.base import BaseCommand, CommandError
-from datetime import datetime
 
 SAMPLE_MATCHES = [
     {
@@ -112,7 +110,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            self.populate_results(SAMPLE_MATCHES)
+            # self.populate_results(SAMPLE_MATCHES)
+            pass
         except Exception as e:
             raise CommandError(e)
 
@@ -120,6 +119,6 @@ class Command(BaseCommand):
 
     @staticmethod
     def format_date(date_string):
-        datetime_object = datetime.strptime(date_string,
-                                            '%d/%m/%y %H:%M')
+        datetime_object = timezone.datetime.strptime(date_string,
+                                                     '%d/%m/%y %H:%M')
         return datetime_object

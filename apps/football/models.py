@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.postgres.fields import JSONField
 
 
@@ -22,8 +23,8 @@ class Match(models.Model):
     team_a = models.CharField(max_length=50)
     team_b = models.CharField(max_length=50)
     league = models.CharField(max_length=100)
-    created_at = models.DateField(auto_now_add=True)
-    match_date = models.DateField()
+    created_at = models.DateTimeField(default=timezone.now)
+    match_date = models.DateTimeField()
     results = models.CharField(max_length=5)
     odds = models.CharField(max_length=20, blank=True)
     team_a_win = models.BooleanField(default=False)

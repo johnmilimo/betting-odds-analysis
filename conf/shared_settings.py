@@ -151,6 +151,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+TIME_ZONE = 'Africa/Nairobi'
+
 USE_I18N = True
 
 USE_L10N = True
@@ -179,7 +181,9 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Add these new lines
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )

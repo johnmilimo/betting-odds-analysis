@@ -1,11 +1,8 @@
-import json
 from django.shortcuts import render
 from django.views import View
-from custom_commands.management.commands.populate_sample_data import Command
-
 from lxml import html as ht
-from datetime import datetime
 from apps.football.models import *
+from django.utils import timezone
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.football.utils.analyzer import MatchAnalyzer
@@ -17,7 +14,7 @@ class MatchView(View):
 
     def get(self, request):
 
-        match_list = Match.objects.all().order_by('-results')
+        match_list = Match.objects.all().order_by('-match_date','league')
         paginator = Paginator(match_list, 30)  # Show 30 matches per page
 
         page = request.GET.get('page')
@@ -34,12 +31,12 @@ class MatchView(View):
         }
 
         if team_a and (not team_b):
-            analyzer = MatchAnalyzer(team_a)
+            analyzer = MatchAnalyzer(team_a.strip())
             results = analyzer.analyze_team_performance()
             results['single'] = True
 
         elif team_a and team_b:
-            analyzer = MatchAnalyzer(team_a, team_b)
+            analyzer = MatchAnalyzer(team_a.strip(), team_b.strip())
             results = analyzer.analyze_match_performance()
             results['single'] = False
 
@@ -78,12 +75,65 @@ class UploadMatchData(LoginRequiredMixin, View):
             # Create an index range for l of n items:
             yield leng[i:i + n]
 
+    def populate_results(self, matches):
+
+        def format_date(date_string):
+            datetime_object = timezone.datetime.strptime(date_string,
+                                                '%d/%m/%y %H:%M')
+            return datetime_object
+
+        for match in matches:
+            try:
+                team_a_win = False
+                team_b_win = False
+                score_draw = False
+                nil_draw = False
+                teams = match['team'].split(" vs ")
+                team_a, team_b = teams[0], teams[1]
+                date = format_date(match['date'])
+                league = match['league']
+                result = match['results'].split(' ')[0].replace("-",":")
+                if int(result.split(":")[0]) > int(result.split(":")[1]):
+                    team_a_win = True
+                elif int(result.split(":")[1]) > int(result.split(":")[0]):
+                    team_b_win = True
+                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                        and int(result.split(":")[0]) > 0:
+                    score_draw = True
+                elif int(result.split(":")[0]) == int(result.split(":")[1]) \
+                        and int(result.split(":")[0]) == 0:
+                    nil_draw = True
+
+                entry = Match.objects.filter(team_a=team_a,
+                                             team_b=team_b,
+                                             match_date=date).first()
+                if entry:
+                    entry.team_a = team_a
+                    entry.team_b = team_b
+                    entry.match_date = date
+                    entry.results = result
+                    entry.league = league
+                    entry.team_a_win = team_a_win
+                    entry.team_b_win = team_b_win
+                    entry.score_draw = score_draw
+                    entry.nil_draw = nil_draw
+                    entry.save()
+                else:
+                    print("Entry not found")
+                    print(team_a, " : ", team_b, " : ", date)
+            except Exception as e:
+                print(match)
+                print(e)
+
     def process_odds_data(self, _file):
         html_text = _file.read()
         tree = ht.fromstring(html_text)
 
         # ['16/07/18', '16/07/18', '16/07/18']
-        time = tree.xpath('//li[@class="date"]/timecomponent[@show-date="true"]/span[@class="ng-binding"]/text()')
+        date = tree.xpath('//li[@class="date"]/timecomponent[@show-date="true"]/span[@class="ng-binding"]/text()')
+
+        # [22:00', '22:30']
+        time = tree.xpath('//li[@class="time"]/timecomponent[@show-date="false"]/span[@class="ng-binding"]/text()')
 
         # ['Agropecuario Argentino', 'Draw', 'Lujan', 'Breidablik', 'Draw', 'Fjolnir', 'Fylkir', 'Draw', 'KR Reykjavik']
         teams = tree.xpath('//span[@class="team"]/text()')
@@ -95,9 +145,6 @@ class UploadMatchData(LoginRequiredMixin, View):
         leagues = tree.xpath('//div/div/span[@class="name"]/text()')
         leagues = [x.replace('\n', '') for x in leagues if x != '\n']
 
-        print(leagues)
-        print()
-
         matches = list(self.chunks(teams, 3))
         odds = list(self.chunks(odds, 3))
 
@@ -106,7 +153,7 @@ class UploadMatchData(LoginRequiredMixin, View):
             obj, created = Match.objects.get_or_create(
                 team_a=match[0],
                 team_b=match[2],
-                match_date=datetime.strptime(time[index], '%d/%m/%y'),
+                match_date=timezone.datetime.strptime(date[index]+' '+time[index], '%d/%m/%y %H:%M'),
             )
             obj.odds = " | ".join(odds[index])
             if created:
@@ -124,9 +171,6 @@ class UploadMatchData(LoginRequiredMixin, View):
         league = tree.xpath('//span[@class="league ng-binding"]/text()')
         results = tree.xpath('//li[@class="result"]/span[@class="ng-binding"]/text()')
 
-        print(results)
-        print()
-
         for i in range(len(teams)):
             matches.append(
                 {
@@ -137,4 +181,4 @@ class UploadMatchData(LoginRequiredMixin, View):
                 }
             )
 
-        Command().populate_results(matches)
+        self.populate_results(matches)

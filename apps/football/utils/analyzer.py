@@ -35,10 +35,10 @@ class MatchAnalyzer:
         past_results = self.get_past_matches()
 
         if not len(list(past_results)):
-            return {
-                "response": "No matches found for teams - {0}".format(
-                    self.team_a)
-            }
+            return results
+
+        print(past_results)
+        print('..')
 
         results['start_period'] = str(past_results[0].match_date)
         results['end_period'] = str(past_results[-1].match_date)
@@ -79,10 +79,7 @@ class MatchAnalyzer:
         past_results = self.get_past_matches()
 
         if not len(list(past_results)):
-            return {
-                "response": "No matches found for teams - {0} vs {1}".format(
-                    self.team_a, self.team_b)
-            }
+            return results
 
         results['start_period'] = str(past_results[0].match_date)
         results['end_period'] = str(past_results[-1].match_date)
