@@ -92,7 +92,8 @@ class UploadMatchData(LoginRequiredMixin, View):
                 team_a, team_b = teams[0], teams[1]
                 date = format_date(match['date'])
                 league = match['league']
-                result = match['results'].split(' ')[0].replace("-",":")
+                result_with_half_time = match['results']
+                result = result_with_half_time.split(' ')[0].replace("-", ":")
                 if int(result.split(":")[0]) > int(result.split(":")[1]):
                     team_a_win = True
                 elif int(result.split(":")[1]) > int(result.split(":")[0]):
@@ -111,7 +112,7 @@ class UploadMatchData(LoginRequiredMixin, View):
                     entry.team_a = team_a
                     entry.team_b = team_b
                     entry.match_date = date
-                    entry.results = result
+                    entry.results = result_with_half_time
                     entry.league = league
                     entry.team_a_win = team_a_win
                     entry.team_b_win = team_b_win

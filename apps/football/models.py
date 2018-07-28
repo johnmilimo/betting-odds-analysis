@@ -25,7 +25,7 @@ class Match(models.Model):
     league = models.CharField(max_length=100)
     created_at = models.DateTimeField(default=timezone.now)
     match_date = models.DateTimeField()
-    results = models.CharField(max_length=5)
+    results = models.CharField(max_length=20)
     odds = models.CharField(max_length=20, blank=True)
     team_a_win = models.BooleanField(default=False)
     team_b_win = models.BooleanField(default=False)

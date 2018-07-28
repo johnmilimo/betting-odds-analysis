@@ -25,7 +25,7 @@
       </div>
     </nav>
   <div class="container">
-    <h1 style="text-align:center">FOOTBALL - LATEST HIGHLIGHTS</h1><br/>
+    <h1 style="text-align:center">FOOTBALL - ODDS AND RESULTS</h1><br/>
     <form action="{% url 'match' %}" method="POST">
         {% csrf_token %}
       <div class="row">
@@ -54,8 +54,8 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Team A</th>
-          <th scope="col">Team B</th>
+          <th scope="col">Home Team</th>
+          <th scope="col">Visiting Team</th>
           <th scope="col">Odds</th>
           <th scope="col">Results</th>
           <th scope="col">League</th>
