@@ -10,12 +10,12 @@ class MatchAnalyzer:
 
         if self.team_b:
             response = Match.objects.raw(
-                'SELECT * FROM football_match WHERE (team_a = %s AND team_b = %s) '
-                           'OR (team_a = %s AND team_b = %s)', [self.team_a, self.team_b,
-                                                                self.team_b, self.team_a])
+                "SELECT * FROM football_match WHERE (team_a = %s AND team_b = %s AND results<>'') "
+                "OR (team_a = %s AND team_b = %s AND results<>'')",
+                [self.team_a, self.team_b, self.team_b, self.team_a])
         else:
             response = Match.objects.raw(
-                'SELECT * FROM football_match WHERE team_a = %s OR team_b = %s',
+                "SELECT * FROM football_match WHERE (team_a = %s OR team_b = %s) AND results<>''",
                 [self.team_a, self.team_a])
 
         return response
@@ -29,7 +29,8 @@ class MatchAnalyzer:
             "end_period": None,
             "total_wins": 0,
             "total_nil_draws": 0,
-            "total_score_draws": 0
+            "total_score_draws": 0,
+            "points": 0
         }
 
         past_results = self.get_past_matches()
@@ -48,10 +49,15 @@ class MatchAnalyzer:
             if (match.team_a_win and match.team_a == self.team_a) or \
                     (match.team_b_win and match.team_b == self.team_a):
                 results['total_wins'] += 1
+                results['points'] += 1
+                scores = [int(score) for score in match.results.split(':')]
+                results['points'] += abs(scores[0] - scores[1])
             elif match.score_draw:
                 results['total_score_draws'] += 1
+                results['points'] += 1
             elif match.nil_draw:
                 results['total_nil_draws'] += 1
+                results['points'] += 1
             else:
                 pass
 
@@ -91,11 +97,11 @@ class MatchAnalyzer:
             elif match.team_b_win:
                 results['total_wins_per_team'][match.team_b] += 1
             elif match.score_draw:
-                results['score_draws'] += 1
+                results['total_score_draws'] += 1
             elif match.nil_draw:
-                results['nil_draws'] += 1
+                results['total_nil_draws'] += 1
             else:
-                raise Exception
+                pass
 
             results['matches'].append(self.get_match_data(match))
 

@@ -105,23 +105,16 @@ class UploadMatchData(LoginRequiredMixin, View):
                         and int(result.split(":")[0]) == 0:
                     nil_draw = True
 
-                entry = Match.objects.filter(team_a=team_a,
-                                             team_b=team_b,
-                                             match_date=date).first()
-                if entry:
-                    entry.team_a = team_a
-                    entry.team_b = team_b
-                    entry.match_date = date
-                    entry.results = result_with_half_time
-                    entry.league = league
-                    entry.team_a_win = team_a_win
-                    entry.team_b_win = team_b_win
-                    entry.score_draw = score_draw
-                    entry.nil_draw = nil_draw
-                    entry.save()
-                else:
-                    print("Entry not found")
-                    print(team_a, " : ", team_b, " : ", date)
+                entry, created = Match.objects.get_or_create(team_a=team_a,
+                                                             team_b=team_b,
+                                                             match_date=date)
+                entry.results = result
+                entry.league = league
+                entry.team_a_win = team_a_win
+                entry.team_b_win = team_b_win
+                entry.score_draw = score_draw
+                entry.nil_draw = nil_draw
+                entry.save()
             except Exception as e:
                 print(match)
                 print(e)
