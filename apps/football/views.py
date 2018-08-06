@@ -14,7 +14,7 @@ class MatchView(View):
 
     def get(self, request):
 
-        match_list = Match.objects.all().order_by('-match_date','league')
+        match_list = Match.objects.all().exclude(results__exact='').order_by('-odds')
         paginator = Paginator(match_list, 30)  # Show 30 matches per page
 
         page = request.GET.get('page')
