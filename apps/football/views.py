@@ -119,6 +119,49 @@ class UploadMatchData(LoginRequiredMixin, View):
                 print(match)
                 print(e)
 
+    def process_odds_data_updated(self, _file):
+        html_text = _file.read()
+        tree = ht.fromstring(html_text)
+
+        # leagues
+        leagues = tree.xpath(
+            '//div[@class="league-row"]/div[@class="event-text ng-binding"]/text()')
+
+        # match date / time
+        date = tree.xpath(
+            '//time-component[@show-date="true"][@show-time="true"]/span[@class="ng-binding"]/text()')
+
+        # team names
+        teams = tree.xpath('//span[@class="team"]/text()')
+
+        # Three way
+        home = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Home"]/div[@class="ng-binding"]/text()')
+        draw = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Draw"]/div[@class="ng-binding"]/text()')
+        away = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Away"]/div[@class="ng-binding"]/text()')
+
+        # Both teams to score
+        yes = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Yes"]/div[@class="ng-binding"]/text()')
+        no = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="No"]/div[@class="ng-binding"]/text()')
+
+        # Over / Under 2.50
+        over = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Over"]/div[@class="ng-binding"]/text()')
+        under = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="Under"]/div[@class="ng-binding"]/text()')
+
+        # Double Chance
+        one_or_x = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="1 or X"]/div[@class="ng-binding"]/text()')
+        x_or_two = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="X or 2"]/div[@class="ng-binding"]/text()')
+        one_or_two = tree.xpath(
+            '//div[@class="event-selections"]/div[@title="1 or 2"]/div[@class="ng-binding"]/text()')
+
     def process_odds_data(self, _file):
         html_text = _file.read()
         tree = ht.fromstring(html_text)
