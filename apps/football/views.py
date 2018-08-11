@@ -1,4 +1,5 @@
 import re
+from collections import OrderedDict
 
 from django.shortcuts import render
 from django.views import View
@@ -16,7 +17,8 @@ class MatchView(View):
 
     def get(self, request):
 
-        match_list = Match.objects.all().exclude(results__exact='').order_by('-odds')
+        # match_list = Match.objects.all().exclude(results__exact='').order_by('-three_way_odds')
+        match_list = Match.objects.all().order_by('-league')
         paginator = Paginator(match_list, 30)  # Show 30 matches per page
 
         page = request.GET.get('page')
@@ -67,7 +69,8 @@ class UploadMatchData(LoginRequiredMixin, View):
             print("process results")
             self.process_results_data(obj.document)
         else:
-            self.process_odds_data(obj.document)
+            # self.process_odds_data(obj.document)
+            self.process_odds_data_updated(obj.document)
 
         return HttpResponse('File uploaded successfully!')
 
@@ -121,6 +124,9 @@ class UploadMatchData(LoginRequiredMixin, View):
                 print(match)
                 print(e)
 
+    def concatenate_odds(self, odds_list):
+        return " | ".join(odds_list)
+
     def process_odds_data_updated(self, _file):
         html_text = _file.read()
         tree = ht.fromstring(html_text)
@@ -129,10 +135,12 @@ class UploadMatchData(LoginRequiredMixin, View):
         leagues = tree.xpath(
             '//div[@class="league-row"]/div[@class="event-text ng-binding"]/text()')
         leagues = [x.replace('\n', '') for x in leagues if x != '\n']
-        leagues_info = dict()
+        leagues_info = OrderedDict()
+        start = 0
         for league in leagues:
-            leagues_info[league] = int(re.search(r'\((.*?)\)',league).group(1))
-
+            end = start + int(re.search(r'\((.*?)\)',league).group(1))
+            leagues_info[league.split(" (")[0]] = [start, end]
+            start = end
         # matches
         teams = tree.xpath(
             '//div[@class="event-names event-column"]/div[@class="event-text ng-binding"]/text()')
@@ -171,10 +179,40 @@ class UploadMatchData(LoginRequiredMixin, View):
         one_or_two = tree.xpath(
             '//div[@class="event-selections"]/div[@title="1 or 2"]/div[@class="ng-binding"]/text()')
 
-        counter = 0
-        for match in matches:
-            for league, match_count in leagues.items():
-                pass
+        for league, slicer in leagues_info.items():
+            match_counter = slicer[0]
+            for match in matches[slicer[0]:slicer[1]]:
+                home_team = match[0]
+                away_team = match[1]
+                double_chance_odds = self.concatenate_odds([one_or_x[match_counter],
+                                                       x_or_two[match_counter],
+                                                       one_or_two[match_counter]])
+                over_under_25_odds = self.concatenate_odds([over[match_counter],
+                                                       under[match_counter]])
+                both_to_score_odds = self.concatenate_odds([yes[match_counter],
+                                                             no[match_counter]])
+                three_way_odds = self.concatenate_odds([home[match_counter],
+                                                        draw[match_counter],
+                                                        away[match_counter]])
+                date_time = date[match_counter].split(" ")
+                match_date = date_time[0] + " " + date_time[2]
+                match_league = league
+
+                obj, created = Match.objects.get_or_create(
+                    team_a=home_team,
+                    team_b=away_team,
+                    match_date=timezone.datetime.strptime(
+                        match_date, '%d/%m/%y %H:%M'),
+                )
+                obj.three_way_odds = three_way_odds
+                obj.both_to_score_odds = both_to_score_odds
+                obj.over_under_25_odds = over_under_25_odds
+                obj.double_chance_odds = double_chance_odds
+                if created:
+                    obj.league = match_league
+                obj.save()
+
+                match_counter += 1
 
     def process_odds_data(self, _file):
         html_text = _file.read()

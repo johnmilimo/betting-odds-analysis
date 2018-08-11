@@ -55,8 +55,11 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Home Team</th>
-          <th scope="col">Visiting Team</th>
-          <th scope="col">Odds</th>
+          <th scope="col">Away Team</th>
+          <th scope="col">3 Way<br>1 | X | 2</th>
+            <th scope="col">Double C.<br>1ORX | XOR2 | 1OR2</th>
+            <th scope="col">Over 2.50 | Under 2.50</th>
+            <th scope="col">Both Teams To Score<br>Y | N</th>
           <th scope="col">Results</th>
           <th scope="col">League</th>
           <th scope="col">Date</th>
@@ -68,7 +71,10 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{match.team_a}}</td>
             <td>{{match.team_b}}</td>
-            <td>{{match.odds}}</td>
+            <td>{{match.three_way_odds}}</td>
+            <td>{{match.double_chance_odds}}</td>
+            <td>{{match.over_under_25_odds}}</td>
+            <td>{{match.both_to_score_odds}}</td>
             <td>{{match.results}}</td>
             <td>{{match.league}}</td>
             <td>{{match.match_date}}</td>
@@ -76,7 +82,6 @@
       {% endfor %}
       </tbody>
     </table>
-
       <div class="pagination">
         <span class="step-links">
             {% if data.has_previous %}

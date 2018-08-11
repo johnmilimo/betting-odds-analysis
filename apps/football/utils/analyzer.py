@@ -119,7 +119,10 @@ class MatchAnalyzer:
         return {
             "team_a": match.team_a,
             "team_b": match.team_b,
-            "odds": match.odds,
+            "three_way_odds": match.three_way_odds,
+            "double_chance_odds": match.double_chance_odds,
+            "over_under_25_odds": match.over_under_25_odds,
+            "both_to_score_odds": match.both_to_score_odds,
             "results": match.results,
             "league": match.league,
             "match_date": match.match_date
