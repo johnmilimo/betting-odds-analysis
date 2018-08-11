@@ -1,3 +1,5 @@
+import re
+
 from django.shortcuts import render
 from django.views import View
 from lxml import html as ht
@@ -126,13 +128,20 @@ class UploadMatchData(LoginRequiredMixin, View):
         # leagues
         leagues = tree.xpath(
             '//div[@class="league-row"]/div[@class="event-text ng-binding"]/text()')
+        leagues = [x.replace('\n', '') for x in leagues if x != '\n']
+        leagues_info = dict()
+        for league in leagues:
+            leagues_info[league] = int(re.search(r'\((.*?)\)',league).group(1))
+
+        # matches
+        teams = tree.xpath(
+            '//div[@class="event-names event-column"]/div[@class="event-text ng-binding"]/text()')
+        teams = [x.replace('\n', '') for x in teams if x != '\n']
+        matches = list(self.chunks(teams, 2))
 
         # match date / time
         date = tree.xpath(
             '//time-component[@show-date="true"][@show-time="true"]/span[@class="ng-binding"]/text()')
-
-        # team names
-        teams = tree.xpath('//span[@class="team"]/text()')
 
         # Three way
         home = tree.xpath(
@@ -161,6 +170,11 @@ class UploadMatchData(LoginRequiredMixin, View):
             '//div[@class="event-selections"]/div[@title="X or 2"]/div[@class="ng-binding"]/text()')
         one_or_two = tree.xpath(
             '//div[@class="event-selections"]/div[@title="1 or 2"]/div[@class="ng-binding"]/text()')
+
+        counter = 0
+        for match in matches:
+            for league, match_count in leagues.items():
+                pass
 
     def process_odds_data(self, _file):
         html_text = _file.read()
